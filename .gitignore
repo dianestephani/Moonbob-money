@@ -137,3 +137,21 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# hardhat output
+artifacts/
+cache/
+typechain-types/
+typechain/
+.hardhat
+
+# Next.js output
+.next/
+out/
+
+# Environment Files
+.env
+.env.local
+.env.*.local
+*.secret
+*.key
