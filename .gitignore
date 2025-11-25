@@ -155,3 +155,9 @@ out/
 .env.*.local
 *.secret
 *.key
+
+# Frontend specific
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.eslintcache
