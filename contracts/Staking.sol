@@ -7,10 +7,18 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /**
+ * @title IMintableToken
+ * @notice Interface for tokens that support minting
+ */
+interface IMintableToken {
+    function mint(address to, uint256 amount) external;
+}
+
+/**
  * @title Staking
  * @author Moonbob Money Team
  * @notice A staking contract that allows users to stake tokens and earn rewards over time
- * @dev Implements a reward-per-second model with reentrancy protection
+ * @dev Implements a reward-per-second model with reentrancy protection and mints rewards
  */
 contract Staking is Ownable, ReentrancyGuard {
     using SafeERC20 for IERC20;
@@ -19,7 +27,7 @@ contract Staking is Ownable, ReentrancyGuard {
     IERC20 public immutable stakingToken;
 
     /// @notice The token used for rewards (can be same as staking token)
-    IERC20 public immutable rewardToken;
+    IMintableToken public immutable rewardToken;
 
     /// @notice Number of reward tokens distributed per second to all stakers
     uint256 public rewardPerSecond;
@@ -110,7 +118,7 @@ contract Staking is Ownable, ReentrancyGuard {
         uint256 initialRewardPerSecond
     ) Ownable(initialOwner) {
         stakingToken = IERC20(stakingTokenAddress);
-        rewardToken = IERC20(rewardTokenAddress);
+        rewardToken = IMintableToken(rewardTokenAddress);
         rewardPerSecond = initialRewardPerSecond;
         lastUpdateTime = block.timestamp;
     }
@@ -205,7 +213,7 @@ contract Staking is Ownable, ReentrancyGuard {
 
     /**
      * @notice Claims all pending rewards
-     * @dev Updates rewards before processing claim
+     * @dev Updates rewards before processing claim, mints new tokens as rewards
      */
     function claimRewards() external nonReentrant updateReward(msg.sender) {
         StakerInfo storage staker = stakers[msg.sender];
@@ -219,8 +227,8 @@ contract Staking is Ownable, ReentrancyGuard {
         // Reset rewards to zero
         staker.rewards = 0;
 
-        // Transfer rewards to user
-        rewardToken.safeTransfer(msg.sender, reward);
+        // Mint rewards to user
+        rewardToken.mint(msg.sender, reward);
 
         emit RewardsClaimed(msg.sender, reward);
     }
