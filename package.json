@@ -9,6 +9,10 @@
     "test": "hardhat test",
     "deploy": "hardhat run scripts/deploy.js",
     "deploy:localhost": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy-sepolia.js --network sepolia",
+    "check:balance": "hardhat run scripts/check-balance.js",
+    "check:balance:sepolia": "hardhat run scripts/check-balance.js --network sepolia",
+    "verify:help": "echo 'Use: npx hardhat verify --network sepolia <address> <constructor-args>'",
     "frontend": "cd frontend && npm run dev",
     "frontend:build": "cd frontend && npm run build",
     "frontend:start": "cd frontend && npm start"

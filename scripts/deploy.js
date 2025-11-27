@@ -1,4 +1,4 @@
-const hre = require("hardhat");
+1const hre = require("hardhat");
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
