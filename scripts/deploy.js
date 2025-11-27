@@ -48,19 +48,39 @@ async function main() {
 
   // Set staking contract as minter so it can mint rewards
   console.log("\nSetting staking contract as minter...");
-  await token.setMinter(stakingAddress);
-  console.log("Staking contract is now the minter");
+  const setMinterTx = await token.setMinter(stakingAddress);
+  await setMinterTx.wait();
+  console.log("✓ Staking contract is now the minter");
+  console.log("✓ Staking contract can now mint reward tokens");
+
+  // Verify the setup
+  const currentMinter = await token.minter();
+  if (currentMinter !== stakingAddress) {
+    throw new Error("Minter was not set correctly!");
+  }
 
   // Save deployment info
-  console.log("\nDeployment Summary:");
-  console.log("===================");
-  console.log("Network:", hre.network.name);
-  console.log("MoonbobToken:", tokenAddress);
-  console.log("Staking Contract:", stakingAddress);
-  console.log("Deployer/Owner:", deployer.address);
-  console.log("Minter:", stakingAddress);
-  console.log("\nNote: Make sure to fund the staking contract with reward tokens!");
-  console.log("Or ensure the staking contract can mint rewards as needed.");
+  console.log("\n" + "=".repeat(60));
+  console.log("DEPLOYMENT SUMMARY");
+  console.log("=".repeat(60));
+  console.log("Network:              ", hre.network.name);
+  console.log("Deployer:             ", deployer.address);
+  console.log("-".repeat(60));
+  console.log("MoonbobToken:         ", tokenAddress);
+  console.log("  - Name:             ", await token.name());
+  console.log("  - Symbol:           ", await token.symbol());
+  console.log("  - Owner:            ", await token.owner());
+  console.log("  - Minter:           ", await token.minter());
+  console.log("-".repeat(60));
+  console.log("Staking Contract:     ", stakingAddress);
+  console.log("  - Staking Token:    ", await staking.stakingToken());
+  console.log("  - Reward Token:     ", await staking.rewardToken());
+  console.log("  - Reward Rate:      ", hre.ethers.formatEther(await staking.rewardPerSecond()), "tokens/second");
+  console.log("  - Owner:            ", await staking.owner());
+  console.log("=".repeat(60));
+  console.log("\n✓ Deployment complete!");
+  console.log("✓ Staking contract can mint rewards directly");
+  console.log("✓ No need to pre-fund the staking contract");
 }
 
 main()
