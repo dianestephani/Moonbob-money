@@ -1,5 +1,5 @@
-export const MOONBOB_TOKEN_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3' as `0x${string}`;
-export const STAKING_ADDRESS = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512' as `0x${string}`;
+export const MOONBOB_TOKEN_ADDRESS = '0x124d1F25Ed6368fFF885c6697d4E78FD835089D0' as `0x${string}`;
+export const STAKING_ADDRESS = '0xF5929810f51daEE84861fB5e9E53f4715df8804f' as `0x${string}`;
 
 export const MOONBOB_TOKEN_ABI = [
   {

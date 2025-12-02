@@ -1,0 +1,20 @@
+{
+  "network": "sepolia",
+  "timestamp": "2025-12-02T16:04:35.392Z",
+  "deployer": "0x1cB5414BAE98e24233193baa5D5a3318d55BaAdd",
+  "contracts": {
+    "MoonbobToken": {
+      "address": "0x124d1F25Ed6368fFF885c6697d4E78FD835089D0",
+      "txHash": "0x30dcdf497848b54ecbf992523c312a008070b1beb81641e5e122535ec48f8769"
+    },
+    "Staking": {
+      "address": "0xF5929810f51daEE84861fB5e9E53f4715df8804f",
+      "txHash": "0x167b0c42effd72c2e66d32db8b310c22884b6faf6ec0f5ca8a176f5e49707d3f",
+      "rewardPerSecond": "1000000000000000000"
+    }
+  },
+  "verification": {
+    "MoonbobToken": "npx hardhat verify --network sepolia 0x124d1F25Ed6368fFF885c6697d4E78FD835089D0 \"0x1cB5414BAE98e24233193baa5D5a3318d55BaAdd\" \"0x1cB5414BAE98e24233193baa5D5a3318d55BaAdd\"",
+    "Staking": "npx hardhat verify --network sepolia 0xF5929810f51daEE84861fB5e9E53f4715df8804f \"0x1cB5414BAE98e24233193baa5D5a3318d55BaAdd\" \"0x124d1F25Ed6368fFF885c6697d4E78FD835089D0\" \"0x124d1F25Ed6368fFF885c6697d4E78FD835089D0\" \"1000000000000000000\""
+  }
+}
