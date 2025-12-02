@@ -507,4 +507,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 *For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)*
 
-*For quick deployment, see [QUICK-START.md](./QUICK-START.md)*
+*For quick deployment, see [QUICK-START.md](./QUICK-START.md)*# Trigger fresh deployment
